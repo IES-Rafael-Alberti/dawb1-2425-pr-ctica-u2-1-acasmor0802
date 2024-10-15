@@ -4,18 +4,14 @@ MENSAJE_ERROR = "*ERROR* Entrada inválida"
 
 
 def comprobar_importe(valor: str) -> bool:
-    valor = valor.startswith('-')
-    if valor == str:
+    try:
+        float(valor)
         return True
-    else:
+    except ValueError:
         return False
-
 
 def comprobar_comando(comando: str) -> bool:
-    if comando == COMANDOS:
-        return True
-    else:
-        return False
+    return comando in COMANDOS
 
 
 def mostrar_mensaje_error():
@@ -58,9 +54,10 @@ def main():
     cont_compras = 0
     cont_ventas = 0
     saldo = 0
-    encuentra_fin = None
+    encuentra_fin = False
+    linea = []
     while not encuentra_fin:
-        linea = (input().split())
+        linea = (input("> "))
         comando, importe = recuperar_comando_e_importe(linea)
 
         if comando is None or not comprobar_comando(comando):
@@ -85,9 +82,11 @@ def main():
 
             if comando == "compra":
                 procesar_compra(saldo,importe)
+                cont_compras += 1
 
             elif comando == "venta":
                 procesar_venta(saldo,importe)
+                cont_ventas += 1
 
 
             
