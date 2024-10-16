@@ -45,19 +45,20 @@ def recuperar_comando_e_importe(linea: str) -> tuple[str, str]:
     if len(lista_palabras) == 1:
         return lista_palabras[0], None
     elif len(lista_palabras) == 2:
-        return lista_palabras[0], lista_palabras[1]
+        x = lista_palabras[0]
+        y = float(lista_palabras[1])
+        return x,y
     else:
         return None, None
 
 
 def main():
-    cont_compras = 0
-    cont_ventas = 0
-    saldo = 0
+    cont_compras = float(0)
+    cont_ventas = float(0)
+    saldo = float(0)
     encuentra_fin = False
-    linea = []
     while not encuentra_fin:
-        linea = (input("> "))
+        linea = input("> ")
         comando, importe = recuperar_comando_e_importe(linea)
 
         if comando is None or not comprobar_comando(comando):
